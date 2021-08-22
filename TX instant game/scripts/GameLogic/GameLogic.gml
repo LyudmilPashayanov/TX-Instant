@@ -20,30 +20,57 @@ function StartGame(){
 	}
 }
 
-function CreateCrossword(crosswordString)
+function CreateCrossword(crosswordString) //         --C?T?--/--A-A---/-STAC---
 {
-	posX = 200;
-	posY = 350;
+	crosswordString = "???C?T???/?--A-A---/?-STAC---";
+	startX = room_width/10;
+	endX = room_width - startX;
+	crosswordWidth = endX - startX;
 	for ( i=1; i<=string_length(crosswordString); i++)
 	{
 		char = string_char_at(crosswordString,i);
-		if(char != "-")
-		{		
+		if(char == "/")
+		{
+			endOfLine = i - 1;
+			show_debug_message("IN");
+			break;
+		}		
+	}
+	neededLetterSize = crosswordWidth / endOfLine;
+	
+	posX = startX + (neededLetterSize /2);
+	posY = room_height / 8;
+	for ( i=1; i<=string_length(crosswordString); i++)
+	{
+		char = string_char_at(crosswordString,i);
+		endOfLine=false;
+		if(char == "/")
+		{
+			endOfLine = true;
+		}
+		else if(char != "-")
+		{
 			box = instance_create_layer(posX,posY, "letters", obj_crosswordEmpty);
+			scale = ((box.sprite_width - neededLetterSize) / box.sprite_width) * 100;
+			
+			box.image_xscale -= (scale/100);
+			box.image_yscale -= (scale/100);
+
 			if(char == "?")
 			{
 				box.SetLetter(" ");
-			}
-			else	
+			}	
+			else  // it is a letter
 			{
 				box.SetLetter(string_char_at(crosswordString,i));
 			}
 		}
-		posX += 100;
-		if(i % 8 == 0)
+		
+		posX += neededLetterSize;
+		if(endOfLine)
 		{
-			posX = 200;
-			posY += 100;
+			posX = startX + (neededLetterSize/2);
+			posY += neededLetterSize;
 		}
 	}
 }
