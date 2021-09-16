@@ -17,4 +17,3 @@ global.letter_5 = "F";
 global.letter_6 = "G";
 
 global.CurrentWord = "";
-global.LastSelectedWord=pointer_null;

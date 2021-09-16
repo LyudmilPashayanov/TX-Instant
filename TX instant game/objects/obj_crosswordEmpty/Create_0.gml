@@ -2,6 +2,7 @@
 // You can write your code in this editor
 
 fill=false;
+
 function SetLetter(letterToSet){
 	if(letterToSet != " ")
 	{
@@ -9,4 +10,5 @@ function SetLetter(letterToSet){
 		// id.sprite_index = letter_spot_filled_5; 
 	}
 	insideLetter = letterToSet;
+	id.image_alpha = 1;
 }
