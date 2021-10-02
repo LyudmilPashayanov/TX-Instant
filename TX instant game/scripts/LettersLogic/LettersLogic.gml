@@ -17,6 +17,9 @@ function ReleaseLetters()
 		}
 		obj_letterHolder.sprite_index = spr_letterHolder;
 		show_debug_message(global.CurrentWord);
+		// Logic to see if the word is correct 
+		CheckForWord(global.CurrentWord);
+		
 		global.CurrentWord = "";
 }
 

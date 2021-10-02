@@ -9,11 +9,11 @@ global.threeLettersPosY_3 = 1600;
 
 global.lettersCount = 3;
 
-global.letter_1 = "A";
-global.letter_2 = "B";
-global.letter_3 = "C";
-global.letter_4 = "D";
-global.letter_5 = "F";
-global.letter_6 = "G";
+global.letter_1 = "";
+global.letter_2 = "";
+global.letter_3 = "";
+global.letter_4 = "";
+global.letter_5 = "";
+global.letter_6 = "";
 
 global.CurrentWord = "";

@@ -2,6 +2,9 @@
 // You can write your code in this editor
 if(fill)
 {
-	FillInLetter();
-	show_debug_message(lerp(0,10,0.01));
+	filledLetterAlpha = lerp(filledLetterAlpha, 1, 0.04);
+	if(filledLetterAlpha>=1)
+	{
+		fill=false;
+	}
 }
