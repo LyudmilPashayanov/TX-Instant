@@ -17,8 +17,6 @@ function SetLetter(letterToSet, show)
 
 function RevealLetter()
 {
-	// animation
-	//FillInLetter();
 	fill=true;
 	id.sprite_index = letter_spot_filled_5;
 }

@@ -7,7 +7,8 @@ global.threeLettersPosY_2 = 1600;
 global.threeLettersPosX_3 = 710;
 global.threeLettersPosY_3 = 1600;
 
-global.lettersCount = 3;
+global.wordSpotPosX_3 = 540;
+global.wordSpotPosY_3 = 1200;
 
 global.letter_1 = "";
 global.letter_2 = "";
@@ -17,3 +18,4 @@ global.letter_5 = "";
 global.letter_6 = "";
 
 global.CurrentWord = "";
+

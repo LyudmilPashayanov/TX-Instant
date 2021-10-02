@@ -1,3 +1,4 @@
+
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function CheckForRelease(){
@@ -7,9 +8,13 @@ function CheckForRelease(){
 	}
 }
 
+	global.indexLetterObjects = -1;
+	global.swipeStripesIndex = -1;
+	
 function ReleaseLetters()
 {
-	global.idLetters = -1;
+	global.indexLetterObjects = -1;
+	global.swipeStripesIndex = -1;
 	with(obj_letterHolder)
 		{
 			pressed=false;
@@ -19,23 +24,45 @@ function ReleaseLetters()
 		show_debug_message(global.CurrentWord);
 		// Logic to see if the word is correct 
 		CheckForWord(global.CurrentWord);
-		
+		wordFrame_object.visible=false;
 		global.CurrentWord = "";
 }
 
 function AddLetterToCurrentWord(letterObject)
 {	
-	global.idLetters += 1;
-	global.currentLetters[global.idLetters] = letterObject;
-	show_debug_message(array_length_1d(global.currentLetters));
-	show_debug_message(global.idLetters);
+	global.indexLetterObjects += 1;
+	global.currentLetters[global.indexLetterObjects] = letterObject;
 	global.CurrentWord += letterObject.letter;
+	AddSwipeStripe(letterObject);
+	wordFrame_object.HandleWidth();
 }
 
 function ReleaseLastAddedLetter()
 {
 	show_debug_message("undoing letter");
-	global.currentLetters[global.idLetters].UndoLetter();
-	global.idLetters -= 1;
+	global.currentLetters[global.indexLetterObjects].UndoLetter();
+	global.indexLetterObjects -= 1;
+	RemoveSwipeStripe();
 	global.CurrentWord = string_delete(global.CurrentWord,string_length(global.CurrentWord),1);
+	wordFrame_object.HandleWidth();
+}
+
+function AddSwipeStripe(positionObject)
+{
+	if(global.swipeStripesIndex >= 0)
+	{
+		global.currentSwipeStripe.movable = false;
+	}
+	global.swipeStripesIndex += 1;
+	global.currentSwipeStripe = instance_create_layer(positionObject.x+200,positionObject.y,"swipeStripes",obj_swipeStripe);
+	global.swipeStripes[global.swipeStripesIndex] = global.currentSwipeStripe;
+	global.currentSwipeStripe.movable = true;
+}
+
+function RemoveSwipeStripe()
+{
+	instance_destroy(global.swipeStripes[global.swipeStripesIndex]); 
+	global.swipeStripesIndex -= 1;
+	global.currentSwipeStripe = global.swipeStripes[global.swipeStripesIndex];
+	global.currentSwipeStripe.movable = true;
 }
