@@ -54,7 +54,7 @@ function AddSwipeStripe(positionObject)
 		global.currentSwipeStripe.movable = false;
 	}
 	global.swipeStripesIndex += 1;
-	global.currentSwipeStripe = instance_create_layer(positionObject.x+200,positionObject.y,"swipeStripes",obj_swipeStripe);
+	global.currentSwipeStripe = instance_create_layer(positionObject.x,positionObject.y,"swipeStripes",obj_swipeStripe);
 	global.swipeStripes[global.swipeStripesIndex] = global.currentSwipeStripe;
 	global.currentSwipeStripe.movable = true;
 }
