@@ -14,7 +14,6 @@ function CheckForRelease(){
 function ReleaseLetters()
 {
 	global.indexLetterObjects = -1;
-	global.swipeStripesIndex = -1;
 	with(obj_letterHolder)
 		{
 			pressed=false;
@@ -22,8 +21,8 @@ function ReleaseLetters()
 		}
 		obj_letterHolder.sprite_index = spr_letterHolder;
 		show_debug_message(global.CurrentWord);
-		// Logic to see if the word is correct 
-		CheckForWord(global.CurrentWord);
+		RemoveAllSwipeStripes();
+		CheckForWord(global.CurrentWord); // Logic to see if the word is correct 
 		wordFrame_object.visible=false;
 		global.CurrentWord = "";
 }
@@ -39,7 +38,6 @@ function AddLetterToCurrentWord(letterObject)
 
 function ReleaseLastAddedLetter()
 {
-	show_debug_message("undoing letter");
 	global.currentLetters[global.indexLetterObjects].UndoLetter();
 	global.indexLetterObjects -= 1;
 	RemoveSwipeStripe();
@@ -52,6 +50,7 @@ function AddSwipeStripe(positionObject)
 	if(global.swipeStripesIndex >= 0)
 	{
 		global.currentSwipeStripe.movable = false;
+		global.currentSwipeStripe.SetLastDestination(positionObject);
 	}
 	global.swipeStripesIndex += 1;
 	global.currentSwipeStripe = instance_create_layer(positionObject.x,positionObject.y,"swipeStripes",obj_swipeStripe);
@@ -65,4 +64,13 @@ function RemoveSwipeStripe()
 	global.swipeStripesIndex -= 1;
 	global.currentSwipeStripe = global.swipeStripes[global.swipeStripesIndex];
 	global.currentSwipeStripe.movable = true;
+}
+
+function RemoveAllSwipeStripes()
+{	
+	for(i=0; i <= global.swipeStripesIndex; i++)
+	{
+		instance_destroy(global.swipeStripes[i]);
+	}
+	global.swipeStripesIndex = -1;
 }
