@@ -16,7 +16,7 @@
   "androidProps": true,
   "installdir": "",
   "files": [
-    {"copyToTargets":9223372036854775807,"filename":"ImageLoadBar.js","origname":"extensions\\ImageLoadBar.js","init":"","final":"","kind":5,"uncompress":false,"functions":[
+    {"filename":"ImageLoadBar.js","origname":"extensions\\ImageLoadBar.js","init":"","final":"","kind":5,"uncompress":false,"functions":[
         {"externalName":"FBInstantGames_LoadingBar","kind":11,"help":"","hidden":false,"returnType":2,"argCount":6,"args":[
             2,
             2,
@@ -25,7 +25,7 @@
             2,
             2,
           ],"resourceVersion":"1.0","name":"FBInstantGames_LoadingBar","tags":[],"resourceType":"GMExtensionFunction",},
-      ],"constants":[],"ProxyFiles":[],"order":[
+      ],"constants":[],"ProxyFiles":[],"copyToTargets":9223372036854775807,"order":[
         {"name":"FBInstantGames_LoadingBar","path":"extensions/FBInstantGames_LoadingBar/FBInstantGames_LoadingBar.yy",},
       ],"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMExtensionFile",},
   ],
@@ -42,11 +42,15 @@
   "maclinkerflags": "",
   "tvosmaclinkerflags": null,
   "iosplistinject": "",
-  "tvosplistinject": null,
+  "tvosplistinject": "",
   "androidinject": "",
   "androidmanifestinject": "",
   "androidactivityinject": "",
   "gradleinject": "",
+  "androidcodeinjection": "",
+  "hasConvertedCodeInjection": true,
+  "ioscodeinjection": "",
+  "tvoscodeinjection": "",
   "iosSystemFrameworkEntries": [],
   "tvosSystemFrameworkEntries": [],
   "iosThirdPartyFrameworkEntries": [],

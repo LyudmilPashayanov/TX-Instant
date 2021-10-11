@@ -94,6 +94,75 @@ function CreateCrossword(crosswordString) //     letters:ate;width:3;words:tea-0
 		// for more than width = 6 
 	}
 	global.allBoxes = allBoxes;
+	SetCrosswordBoxesDirections(width,height);
+}
+
+function SetCrosswordBoxesDirections(crosswordWidth, crosswordHeight)
+{
+	boxes = global.allBoxes;
+	for ( i= 0; i < array_length(boxes); i++)
+	{
+		if(boxes[i].insideLetter != "")
+		{
+			show_debug_message("i: ");
+			show_debug_message(i);
+			height = floor(i / crosswordWidth) + 1;
+			width = i - ((height - 1) * crosswordWidth);
+			width +=1;
+			show_debug_message("height: ");
+			show_debug_message(height);
+			show_debug_message("width: ");
+			show_debug_message(width);
+			show_debug_message("boxes[i] ");
+			show_debug_message(boxes[i].insideLetter);
+			show_debug_message("----------------------- ");
+			
+			// check if LEFT side is used
+			if(i-1 >= 0)
+			{
+				if((width-1) % crosswordWidth != 0 && boxes[i-1].insideLetter != "")
+				{
+					boxes[i].left = true;
+				} 
+			}
+			
+			// check if RIGHT side is used
+			if(i+1 < array_length(boxes))
+			{
+				if(width % crosswordWidth != 0 && boxes[i+1].insideLetter != "")
+				{
+					boxes[i].right = true;
+				}
+			}
+			//check if TOP side is used
+			if(i - crosswordWidth >= 0)
+			{
+				if((height - 1) >= 1 && boxes[i - crosswordWidth].insideLetter != "")
+				{
+					boxes[i].top = true;
+				}
+			}
+			
+			//check if BOTTOM side is used
+			if( (height + 1) <= crosswordHeight && boxes[i + crosswordWidth].insideLetter != "")
+			{
+				boxes[i].bottom = true;
+			}
+			if(i == 1)
+			{
+					show_debug_message("top: ");
+				show_debug_message(boxes[i].top);
+				show_debug_message("bottom: ");
+				show_debug_message(boxes[i].bottom);
+				show_debug_message("right: ");
+				show_debug_message(boxes[i].right);
+				show_debug_message("left: ");
+				show_debug_message(boxes[i].left);
+			}
+			boxes[i].ChangeSprite();
+			
+		}
+	}
 }
 
 function CheckForWord(word)
@@ -106,6 +175,7 @@ function CheckForWord(word)
 		//	show_debug_message(global.unknownWords[| i]);
 		//	show_debug_message("word = "); 
 		//	show_debug_message(word);
+			ds_list_delete(global.unknownWords,i);
 			RevealWord(word);
 			return;
 		}
@@ -128,6 +198,10 @@ function RevealWord(word)
 				global.allBoxes[string_char_at(global.puzzleWordPosition[i],j)].RevealLetter();
 			}
 		}
+	}
+	if(ds_list_size(global.unknownWords) == 0)
+	{
+			show_debug_message("!!! WIN - all words have been found !!!"); 		
 	}
 }
 

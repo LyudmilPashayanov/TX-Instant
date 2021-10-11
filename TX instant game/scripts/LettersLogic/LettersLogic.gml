@@ -20,7 +20,6 @@ function ReleaseLetters()
 			pressed_once=false;
 		}
 		obj_letterHolder.sprite_index = spr_letterHolder;
-		show_debug_message(global.CurrentWord);
 		RemoveAllSwipeStripes();
 		CheckForWord(global.CurrentWord); // Logic to see if the word is correct 
 		wordFrame_object.visible=false;

@@ -16,7 +16,7 @@
   "androidProps": false,
   "installdir": "",
   "files": [
-    {"copyToTargets":-1,"filename":"FBInstant.js","origname":"","init":"","final":"","kind":5,"uncompress":false,"functions":[
+    {"filename":"FBInstant.js","origname":"","init":"","final":"","kind":5,"uncompress":false,"functions":[
         {"externalName":"","kind":5,"help":"","hidden":false,"returnType":1,"argCount":0,"args":[],"resourceVersion":"1.0","name":"FBInstantGames_Initialise","tags":[],"resourceType":"GMExtensionFunction",},
         {"externalName":"","kind":5,"help":"","hidden":false,"returnType":1,"argCount":0,"args":[
             1,
@@ -49,7 +49,7 @@
         {"externalName":"","kind":5,"help":"","hidden":false,"returnType":1,"argCount":0,"args":[],"resourceVersion":"1.0","name":"FBInstantGames_GetContextType","tags":[],"resourceType":"GMExtensionFunction",},
         {"externalName":"","kind":5,"help":"","hidden":false,"returnType":1,"argCount":0,"args":[],"resourceVersion":"1.0","name":"FBInstantGames_GetPlatform","tags":[],"resourceType":"GMExtensionFunction",},
         {"externalName":"","kind":5,"help":"","hidden":false,"returnType":1,"argCount":0,"args":[],"resourceVersion":"1.0","name":"FBInstantGames_GetLocale","tags":[],"resourceType":"GMExtensionFunction",},
-      ],"constants":[],"ProxyFiles":[],"order":[
+      ],"constants":[],"ProxyFiles":[],"copyToTargets":-1,"order":[
         {"name":"FBInstantGames_Initialise","path":"extensions/FBInstantGames/FBInstantGames.yy",},
         {"name":"FBInstantGames_StartGame","path":"extensions/FBInstantGames/FBInstantGames.yy",},
         {"name":"FBInstantGames_SetLoadProgress","path":"extensions/FBInstantGames/FBInstantGames.yy",},
@@ -79,11 +79,15 @@
   "maclinkerflags": "",
   "tvosmaclinkerflags": null,
   "iosplistinject": "",
-  "tvosplistinject": null,
+  "tvosplistinject": "",
   "androidinject": "",
   "androidmanifestinject": "",
   "androidactivityinject": "",
   "gradleinject": "",
+  "androidcodeinjection": "",
+  "hasConvertedCodeInjection": true,
+  "ioscodeinjection": "",
+  "tvoscodeinjection": "",
   "iosSystemFrameworkEntries": [],
   "tvosSystemFrameworkEntries": [],
   "iosThirdPartyFrameworkEntries": [],
