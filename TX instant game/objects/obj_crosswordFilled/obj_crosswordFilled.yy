@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "letter_spot_filled_5",
-    "path": "sprites/letter_spot_filled_5/letter_spot_filled_5.yy",
+    "name": "letterBoxFilled_4",
+    "path": "sprites/letterBoxFilled_4/letterBoxFilled_4.yy",
   },
   "solid": false,
   "visible": true,

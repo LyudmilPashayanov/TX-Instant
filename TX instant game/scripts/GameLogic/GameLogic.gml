@@ -104,18 +104,19 @@ function SetCrosswordBoxesDirections(crosswordWidth, crosswordHeight)
 	{
 		if(boxes[i].insideLetter != "")
 		{
-			show_debug_message("i: ");
-			show_debug_message(i);
+			
 			height = floor(i / crosswordWidth) + 1;
 			width = i - ((height - 1) * crosswordWidth);
 			width +=1;
-			show_debug_message("height: ");
-			show_debug_message(height);
-			show_debug_message("width: ");
-			show_debug_message(width);
-			show_debug_message("boxes[i] ");
-			show_debug_message(boxes[i].insideLetter);
-			show_debug_message("----------------------- ");
+			//show_debug_message("i: ");
+			//show_debug_message(i);
+		//  show_debug_message("height: ");
+		//  show_debug_message(height);
+		//  show_debug_message("width: ");
+		//  show_debug_message(width);
+		//  show_debug_message("boxes[i] ");
+		//  show_debug_message(boxes[i].insideLetter);
+		//  show_debug_message("----------------------- ");
 			
 			// check if LEFT side is used
 			if(i-1 >= 0)
@@ -148,17 +149,17 @@ function SetCrosswordBoxesDirections(crosswordWidth, crosswordHeight)
 			{
 				boxes[i].bottom = true;
 			}
-			if(i == 1)
-			{
-					show_debug_message("top: ");
-				show_debug_message(boxes[i].top);
-				show_debug_message("bottom: ");
-				show_debug_message(boxes[i].bottom);
-				show_debug_message("right: ");
-				show_debug_message(boxes[i].right);
-				show_debug_message("left: ");
-				show_debug_message(boxes[i].left);
-			}
+			//if(i == 1)
+			//{
+			//    show_debug_message("top: ");
+			//	show_debug_message(boxes[i].top);
+			//	show_debug_message("bottom: ");
+			//	show_debug_message(boxes[i].bottom);
+			//	show_debug_message("right: ");
+			//	show_debug_message(boxes[i].right);
+			//	show_debug_message("left: ");
+			//	show_debug_message(boxes[i].left);
+			//}
 			boxes[i].ChangeSprite();
 			
 		}

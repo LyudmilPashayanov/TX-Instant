@@ -24,12 +24,12 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"6c1825d8-28d3-489a-b771-b274fdf853a9","path":"sprites/letter_spot_filled_5/letter_spot_filled_5.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"6c1825d8-28d3-489a-b771-b274fdf853a9","path":"sprites/letter_spot_filled_5/letter_spot_filled_5.yy",},"LayerId":{"name":"50ae5d37-218f-4570-b2f8-803c6188cd39","path":"sprites/letter_spot_filled_5/letter_spot_filled_5.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"letter_spot_filled_5","path":"sprites/letter_spot_filled_5/letter_spot_filled_5.yy",},"resourceVersion":"1.0","name":"6c1825d8-28d3-489a-b771-b274fdf853a9","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"6c1825d8-28d3-489a-b771-b274fdf853a9","path":"sprites/letterBoxFilled_4/letterBoxFilled_4.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"6c1825d8-28d3-489a-b771-b274fdf853a9","path":"sprites/letterBoxFilled_4/letterBoxFilled_4.yy",},"LayerId":{"name":"50ae5d37-218f-4570-b2f8-803c6188cd39","path":"sprites/letterBoxFilled_4/letterBoxFilled_4.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"letterBoxFilled_4","path":"sprites/letterBoxFilled_4/letterBoxFilled_4.yy",},"resourceVersion":"1.0","name":"6c1825d8-28d3-489a-b771-b274fdf853a9","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
-    "spriteId": {"name":"letter_spot_filled_5","path":"sprites/letter_spot_filled_5/letter_spot_filled_5.yy",},
+    "spriteId": {"name":"letterBoxFilled_4","path":"sprites/letterBoxFilled_4/letterBoxFilled_4.yy",},
     "timeUnits": 1,
     "playback": 1,
     "playbackSpeed": 30.0,
@@ -41,8 +41,8 @@
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"5357fcd0-b91f-4d55-8558-5338797d44d4","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"6c1825d8-28d3-489a-b771-b274fdf853a9","path":"sprites/letter_spot_filled_5/letter_spot_filled_5.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
-          ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"modifiers":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack",},
+            {"id":"5357fcd0-b91f-4d55-8558-5338797d44d4","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"6c1825d8-28d3-489a-b771-b274fdf853a9","path":"sprites/letterBoxFilled_4/letterBoxFilled_4.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+          ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
     "lockOrigin": false,
@@ -58,9 +58,9 @@
     "yorigin": 43,
     "eventToFunction": {},
     "eventStubScript": null,
-    "parent": {"name":"letter_spot_filled_5","path":"sprites/letter_spot_filled_5/letter_spot_filled_5.yy",},
+    "parent": {"name":"letterBoxFilled_4","path":"sprites/letterBoxFilled_4/letterBoxFilled_4.yy",},
     "resourceVersion": "1.3",
-    "name": "letter_spot_filled_5",
+    "name": "letterBoxFilled_4",
     "tags": [],
     "resourceType": "GMSequence",
   },
@@ -73,7 +73,7 @@
     "path": "folders/Sprites.yy",
   },
   "resourceVersion": "1.0",
-  "name": "letter_spot_filled_5",
+  "name": "letterBoxFilled_4",
   "tags": [],
   "resourceType": "GMSprite",
 }
