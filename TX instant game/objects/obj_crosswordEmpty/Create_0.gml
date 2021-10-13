@@ -43,12 +43,12 @@ function ChangeSprite()
 	else if(!left && !right && top && !bottom)
 	{
 		id.sprite_index = letterBoxSides_1;
+		id.image_angle += 180;
 		spriteToFill = "letterBoxFilled_1";
 	}
 	else if(!left && !right && !top && bottom)
 	{
-		id.sprite_index = letterBoxSides_1;
-		id.image_angle += 180;
+		id.sprite_index = letterBoxSides_1;	
 		spriteToFill = "letterBoxFilled_1";
 	}
 	else if(left && right && !top && !bottom)

@@ -21,6 +21,24 @@ function SetAvailableLetters(){
 		"bottomLetters",obj_letterHolder);
 		letterId_3.InitializeLetter(global.letter_3);
 	}
+	else if(global.lettersCount == 4)
+	{
+		letterId_1 = instance_create_layer(global.fourLettersPosX_1,global.fourLettersPosY_1,
+		"bottomLetters",obj_letterHolder);
+		letterId_1.InitializeLetter(global.letter_1);
+
+		letterId_2 = instance_create_layer(global.fourLettersPosX_2,global.fourLettersPosY_2,
+		"bottomLetters",obj_letterHolder);
+		letterId_2.InitializeLetter(global.letter_2);
+	
+		letterId_3 = instance_create_layer(global.fourLettersPosX_3,global.fourLettersPosY_3,
+		"bottomLetters",obj_letterHolder);
+		letterId_3.InitializeLetter(global.letter_3);
+		
+		letterId_4 = instance_create_layer(global.fourLettersPosX_4,global.fourLettersPosY_4,
+		"bottomLetters",obj_letterHolder);
+		letterId_4.InitializeLetter(global.letter_4);
+	}
 }
 
 function DefineGlobalsFromJSON(json)
@@ -28,6 +46,18 @@ function DefineGlobalsFromJSON(json)
 	global.letter_1 = string_char_at(json.letters,1);
 	global.letter_2 = string_char_at(json.letters,2);
 	global.letter_3 = string_char_at(json.letters,3);
+	if(string_length(json.letters) > 3)
+	{
+		global.letter_4 = string_char_at(json.letters,4);
+		if(string_length(json.letters) > 4)
+		{
+			global.letter_5 = string_char_at(json.letters,5);
+			if(string_length(json.letters) > 5)
+			{
+				global.letter_6 = string_char_at(json.letters,6);
+			}
+		}
+	}
 	global.lettersCount = string_length(json.letters);
 	global.puzzleWords = json.words;
 	global.puzzleWordPosition = json.positions;
@@ -37,7 +67,8 @@ function DefineGlobalsFromJSON(json)
 
 function CreateCrossword(crosswordString) //     letters:ate;width:3;words:tea-012,ate-678,eat-147;knownWords:eat;
 {
-	json = "{\n   \"letters\":\"ate\",\n   \"width\":3,\n   \"height\":3,\n   \"words\":[\n      \"tea\",\n      \"ate\",\n      \"eat\"\n   ],\n   \"positions\":[\n      \"012\",\n      \"678\",\n      \"147\"\n   ],\n   \"knownWords\":[\n      \"ate\"\n   ]\n}"
+	//json = "{\r\n   \"letters\":\"ate\",\r\n   \"width\":3,\r\n   \"height\":3,\r\n   \"words\":[\r\n      \"tea\",\r\n      \"ate\",\r\n      \"eat\"\r\n   ],\r\n   \"positions\":[\r\n      [0,1,2],\r\n      [6,7,8],\r\n      [1,4,7]\r\n   ],\r\n   \"knownWords\":[\r\n      \"ate\"\r\n   ]\r\n}"
+	json = "{\r\n   \"letters\":\"nose\",\r\n   \"width\":5,\r\n   \"height\":4,\r\n   \"words\":[\r\n      \"son\",\r\n      \"one\",\r\n      \"nose\",\r\n\"ones\"\r\n   ],\r\n   \"positions\":[\r\n      [5,10,15],\r\n      [10,11,12],\r\n      [1,2,3,4],\r\n      [2,7,12,17] \r\n   ],\r\n   \"knownWords\":[\"nose\",\"ones\",\"one\",\"son\"  ]\r\n}";
 	josnClass = json_parse(json);
 	DefineGlobalsFromJSON(josnClass);
 	width = josnClass.width;
@@ -82,10 +113,10 @@ function CreateCrossword(crosswordString) //     letters:ate;width:3;words:tea-0
 			{
 				ds_list_add(global.unknownWords, global.puzzleWords[i]);
 			}
-			for ( j= 1; j <= string_length(global.puzzleWordPosition[i]); j++) // 0,1,2
+			for ( j= 0; j < array_length(global.puzzleWordPosition[i]); j++) // 0,1,2
 			{
-				index = string_char_at(global.puzzleWordPosition[i],j);
-				allBoxes[index].SetLetter(string_char_at(global.puzzleWords[i],j),isKnownWord);
+				index = global.puzzleWordPosition[i][j]; // CHECK FOR COMMAS WHEN GTETTING POSITIONS
+				allBoxes[index].SetLetter(string_char_at(global.puzzleWords[i],j+1),isKnownWord);
 			}
 		}
 	}
@@ -121,6 +152,7 @@ function SetCrosswordBoxesDirections(crosswordWidth, crosswordHeight)
 			// check if LEFT side is used
 			if(i-1 >= 0)
 			{
+				
 				if((width-1) % crosswordWidth != 0 && boxes[i-1].insideLetter != "")
 				{
 					boxes[i].left = true;
@@ -149,17 +181,17 @@ function SetCrosswordBoxesDirections(crosswordWidth, crosswordHeight)
 			{
 				boxes[i].bottom = true;
 			}
-			//if(i == 1)
-			//{
-			//    show_debug_message("top: ");
-			//	show_debug_message(boxes[i].top);
-			//	show_debug_message("bottom: ");
-			//	show_debug_message(boxes[i].bottom);
-			//	show_debug_message("right: ");
-			//	show_debug_message(boxes[i].right);
-			//	show_debug_message("left: ");
-			//	show_debug_message(boxes[i].left);
-			//}
+		//if(i == 5)
+		//{
+		//    show_debug_message("top: ");
+		//	show_debug_message(boxes[i].top);
+		//	show_debug_message("bottom: ");
+		//	show_debug_message(boxes[i].bottom);
+		//	show_debug_message("right: ");
+		//	show_debug_message(boxes[i].right);
+		//	show_debug_message("left: ");
+		//	show_debug_message(boxes[i].left);
+		//}
 			boxes[i].ChangeSprite();
 			
 		}
