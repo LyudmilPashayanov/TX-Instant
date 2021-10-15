@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "letterBoxSides_1",
-    "path": "sprites/letterBoxSides_1/letterBoxSides_1.yy",
+    "name": "letterBoxSides_3",
+    "path": "sprites/letterBoxSides_3/letterBoxSides_3.yy",
   },
   "solid": false,
   "visible": true,
@@ -40,7 +40,7 @@
     "path": "folders/Objects.yy",
   },
   "resourceVersion": "1.0",
-  "name": "obj_crosswordEmpty",
+  "name": "test2",
   "tags": [],
   "resourceType": "GMObject",
 }

@@ -67,35 +67,55 @@ function DefineGlobalsFromJSON(json)
 
 function CreateCrossword(crosswordString) //     letters:ate;width:3;words:tea-012,ate-678,eat-147;knownWords:eat;
 {
-	//json = "{\r\n   \"letters\":\"ate\",\r\n   \"width\":3,\r\n   \"height\":3,\r\n   \"words\":[\r\n      \"tea\",\r\n      \"ate\",\r\n      \"eat\"\r\n   ],\r\n   \"positions\":[\r\n      [0,1,2],\r\n      [6,7,8],\r\n      [1,4,7]\r\n   ],\r\n   \"knownWords\":[\r\n      \"ate\"\r\n   ]\r\n}"
-	json = "{\r\n   \"letters\":\"nose\",\r\n   \"width\":5,\r\n   \"height\":4,\r\n   \"words\":[\r\n      \"son\",\r\n      \"one\",\r\n      \"nose\",\r\n\"ones\"\r\n   ],\r\n   \"positions\":[\r\n      [5,10,15],\r\n      [10,11,12],\r\n      [1,2,3,4],\r\n      [2,7,12,17] \r\n   ],\r\n   \"knownWords\":[\"nose\",\"ones\",\"one\",\"son\"  ]\r\n}";
+	//json = "{\r\n   \"letters\":\"ate\",\r\n   \"width\":3,\r\n   \"height\":3,\r\n   \"words\":[\r\n      \"tea\",\r\n      \"ate\",\r\n      \"eat\"\r\n   ],\r\n   \"positions\":[\r\n      [0,1,2],\r\n      [6,7,8],\r\n      [1,4,7]\r\n   ],\r\n   \"knownWords\":[\r\n      \"ate\"\r\n   ]\r\n}"      
+	json = "{\r\n   \"letters\":\"nose\",\r\n   \"width\":5,\r\n   \"height\":4,\r\n   \"words\":[\r\n      \"son\",\r\n      \"one\",\r\n      \"nose\",\r\n\"ones\"\r\n   ],\r\n   \"positions\":[\r\n      [5,10,15],\r\n      [10,11,12],\r\n      [1,2,3,4],\r\n      [2,7,12,17] \r\n   ],\r\n   \"knownWords\":[]\r\n}"; //\"nose\",\"ones\",\"one\",\"son\"  
 	josnClass = json_parse(json);
 	DefineGlobalsFromJSON(josnClass);
 	width = josnClass.width;
 	height = josnClass.height;
 	
-	refernceBox = instance_create_layer(0,0, "crossword", obj_crosswordEmpty);
+	referenceBox = instance_create_layer(0,0, "crossword", obj_crosswordEmpty);
+	//referenceBox.image_xscale += 0.5;
+	//referenceBox.image_yscale += 0.5;
 	allBoxes = array_create(width * height);
-	if(width < 6)
+	if(width < 7)
 	{
-		centerOfScreen = (room_width/2) + (refernceBox.sprite_width/2);
-		startX = centerOfScreen - (refernceBox.sprite_width * (width/2));
+		centerOfScreen = (room_width/2) + (referenceBox.sprite_width/2);
+		startX = centerOfScreen - (referenceBox.sprite_width * (width/2));
 		posX = startX;
 		posY = room_height / 8;
-		instance_destroy(refernceBox);
+	
+
+		instance_destroy(referenceBox);
 		for(i=0; i < width * height; i++)
 		{
 			box = instance_create_layer(posX, posY, "crossword", obj_crosswordEmpty);
+			//box.image_xscale += 0.5;
+			//box.image_yscale += 0.5;
 			allBoxes[i] = box;
 			box.image_alpha = 0;
 			if( (i+1) % width == 0)
 			{
 				posX = startX;
-				posY += box.sprite_height;
+				posY += box.sprite_height-3;
 			}
 			else
 			{
-				posX += box.sprite_width; 
+				posX += box.sprite_width-3; 
+				if(i=0)
+				{
+						show_debug_message("sprite_width: ");
+		show_debug_message(box.sprite_height);
+				show_debug_message("posx ");
+				show_debug_message(posX);
+				}
+				if(i=1)
+				{
+						show_debug_message("sprite_width: ");
+		show_debug_message(box.sprite_height);
+				show_debug_message("posx + 1: ");
+				show_debug_message(posX);
+				}
 			}
 		}
 		for ( i= 0; i < array_length(global.puzzleWords); i++) // tea
@@ -115,7 +135,7 @@ function CreateCrossword(crosswordString) //     letters:ate;width:3;words:tea-0
 			}
 			for ( j= 0; j < array_length(global.puzzleWordPosition[i]); j++) // 0,1,2
 			{
-				index = global.puzzleWordPosition[i][j]; // CHECK FOR COMMAS WHEN GTETTING POSITIONS
+				index = global.puzzleWordPosition[i][j];
 				allBoxes[index].SetLetter(string_char_at(global.puzzleWords[i],j+1),isKnownWord);
 			}
 		}
@@ -135,20 +155,10 @@ function SetCrosswordBoxesDirections(crosswordWidth, crosswordHeight)
 	{
 		if(boxes[i].insideLetter != "")
 		{
-			
 			height = floor(i / crosswordWidth) + 1;
 			width = i - ((height - 1) * crosswordWidth);
 			width +=1;
-			//show_debug_message("i: ");
-			//show_debug_message(i);
-		//  show_debug_message("height: ");
-		//  show_debug_message(height);
-		//  show_debug_message("width: ");
-		//  show_debug_message(width);
-		//  show_debug_message("boxes[i] ");
-		//  show_debug_message(boxes[i].insideLetter);
-		//  show_debug_message("----------------------- ");
-			
+				
 			// check if LEFT side is used
 			if(i-1 >= 0)
 			{
@@ -204,10 +214,6 @@ function CheckForWord(word)
 	{
 		if(global.unknownWords[| i] == word)
 		{
-		//	show_debug_message("global.unknownWords[| i] = "); 
-		//	show_debug_message(global.unknownWords[| i]);
-		//	show_debug_message("word = "); 
-		//	show_debug_message(word);
 			ds_list_delete(global.unknownWords,i);
 			RevealWord(word);
 			return;
@@ -222,13 +228,10 @@ function RevealWord(word)
 	{
 		if(global.puzzleWords[i] == word)
 		{
-			//show_debug_message("global.puzzleWordPosition[i]: ");
-			//show_debug_message(global.puzzleWordPosition[i]);
-			for ( j=1; j <= string_length(global.puzzleWordPosition[i]); j++)
+			for ( j=0; j < array_length(global.puzzleWordPosition[i]); j++)
 			{
-				//show_debug_message("string_length: ");
-				//show_debug_message(global.puzzleWordPosition[i]);
-				global.allBoxes[string_char_at(global.puzzleWordPosition[i],j)].RevealLetter();
+				index = global.puzzleWordPosition[i][j];
+				global.allBoxes[index].RevealLetter();
 			}
 		}
 	}
