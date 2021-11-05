@@ -65,7 +65,7 @@ function ChangeSprite()
 	else if(left && !right && !top && bottom)
 	{
 		id.sprite_index = letterBoxSides_2_Angle;
-		id.image_angle += 90;
+		id.image_angle -= 90;
 		spriteToFill = "letterBoxFilled_2_Angle";
 	}
 	else if(left && !right && top && !bottom)
@@ -77,7 +77,7 @@ function ChangeSprite()
 	else if(!left && right && top && !bottom)
 	{
 		id.sprite_index = letterBoxSides_2_Angle;
-		id.image_angle -= 90;
+		id.image_angle += 90;
 		spriteToFill = "letterBoxFilled_2_Angle";
 	}
 	else if(!left && right && !top && bottom)

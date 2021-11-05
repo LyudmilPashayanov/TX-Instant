@@ -1,6 +1,7 @@
 
 function DefineLayers()
 {
+	global.futuraBoldFont = font_add("Futura-Bold-03.ttf", 55, true, true, 32, 128);
 	layer_create(-300, "crossword")
 	layer_create(-300, "bottomLetters")
 	layer_create(-400, "swipeStripes")
@@ -43,65 +44,76 @@ function SetAvailableLetters(){
 
 function DefineGlobalsFromJSON(json)
 {
-	global.letter_1 = string_char_at(json.letters,1);
-	global.letter_2 = string_char_at(json.letters,2);
-	global.letter_3 = string_char_at(json.letters,3);
+	global.letter_1 = string_upper(string_char_at(json.letters,1));
+	global.letter_2 = string_upper(string_char_at(json.letters,2));
+	global.letter_3 = string_upper(string_char_at(json.letters,3));
 	if(string_length(json.letters) > 3)
 	{
-		global.letter_4 = string_char_at(json.letters,4);
+		global.letter_4 = string_upper(string_char_at(json.letters,4));
 		if(string_length(json.letters) > 4)
 		{
-			global.letter_5 = string_char_at(json.letters,5);
+			global.letter_5 = string_upper(string_char_at(json.letters,5));
 			if(string_length(json.letters) > 5)
 			{
-				global.letter_6 = string_char_at(json.letters,6);
+				global.letter_6 = string_upper(string_char_at(json.letters,6));
 			}
 		}
 	}
 	global.lettersCount = string_length(json.letters);
 	global.puzzleWords = json.words;
+	for ( i= 0; i < array_length(global.puzzleWords); i++) // tea  page
+	{
+		global.puzzleWords[i] = string_upper(global.puzzleWords[i]);
+	}
 	global.puzzleWordPosition = json.positions;
 	global.knownWords = json.knownWords;
+	for ( i= 0; i < array_length(global.knownWords); i++) // tea  page
+	{
+		global.knownWords[i] = string_upper(global.knownWords[i]);
+	}
 	global.unknownWords = ds_list_create();
 }
 
 function CreateCrossword(crosswordString) //     letters:ate;width:3;words:tea-012,ate-678,eat-147;knownWords:eat;
 {
-	//json = "{\r\n   \"letters\":\"ate\",\r\n   \"width\":3,\r\n   \"height\":3,\r\n   \"words\":[\r\n      \"tea\",\r\n      \"ate\",\r\n      \"eat\"\r\n   ],\r\n   \"positions\":[\r\n      [0,1,2],\r\n      [6,7,8],\r\n      [1,4,7]\r\n   ],\r\n   \"knownWords\":[\r\n      \"ate\"\r\n   ]\r\n}"      
-	json = "{\r\n   \"letters\":\"nose\",\r\n   \"width\":5,\r\n   \"height\":4,\r\n   \"words\":[\r\n      \"son\",\r\n      \"one\",\r\n      \"nose\",\r\n\"ones\"\r\n   ],\r\n   \"positions\":[\r\n      [5,10,15],\r\n      [10,11,12],\r\n      [1,2,3,4],\r\n      [2,7,12,17] \r\n   ],\r\n   \"knownWords\":[]\r\n}"; //\"nose\",\"ones\",\"one\",\"son\"  
+	json = "{\r\n   \"letters\":\"ate\",\r\n   \"width\":3,\r\n   \"height\":3,\r\n   \"words\":[\r\n      \"tea\",\r\n      \"ate\",\r\n      \"eat\"\r\n   ],\r\n   \"positions\":[\r\n      [0,1,2],\r\n      [6,7,8],\r\n      [1,4,7]\r\n   ],\r\n   \"knownWords\":[\r\n      \"ate\"\r\n   ]\r\n}"      
+	//json = "{\r\n   \"letters\":\"nose\",\r\n   \"width\":5,\r\n   \"height\":4,\r\n   \"words\":[\r\n      \"son\",\r\n      \"one\",\r\n      \"nose\",\r\n\"ones\"\r\n   ],\r\n   \"positions\":[\r\n      [5,10,15],\r\n      [10,11,12],\r\n      [1,2,3,4],\r\n      [2,7,12,17] \r\n   ],\r\n   \"knownWords\":[]\r\n}"; //\"nose\",\"ones\",\"one\",\"son\"  
+	//json = "{\r\n   \"letters\":\"passage\",\r\n   \"width\":11,\r\n   \"height\":8,\r\n   \"words\":[\r\n      \"page\",\r\n      \"apes\",\r\n      \"passage\",\r\n      \"pages\",\r\n     \"ages\",\r\n     \"gasps\",\r\n     \"sages\",\r\n       \"saga\",\r\n       \"age\",\r\n      \"seas\"\r\n   ],\r\n   \"positions\":[\r\n      [44,55,66,77],\r\n      [55,56,57,58],\r\n      [24,25,26,27,28,29,30],\r\n      [14,25,36,47,58],\r\n      [4,5,6,7],\r\n      [5,16,27,38,49],\r\n      [7,18,29,40,51],\r\n      [51,52,53,54],\r\n      [52,63,74],\r\n      [32,43,54,65]\r\n   ],\r\n   \"knownWords\":[]\r\n}";
 	josnClass = json_parse(json);
 	DefineGlobalsFromJSON(josnClass);
 	width = josnClass.width;
 	height = josnClass.height;
-	
-	referenceBox = instance_create_layer(0,0, "crossword", obj_crosswordEmpty);
-	//referenceBox.image_xscale += 0.5;
-	//referenceBox.image_yscale += 0.5;
-	allBoxes = array_create(width * height);
-	if(width < 7)
+	scaleUp = (11 - width) / 10; // formula  percent showing how much to scale the crossword.
+	if(scaleUp > 0.5)
 	{
+		scaleUp = 0.5; // maximum larged boxes
+	}
+	referenceBox = instance_create_layer(0,0, "crossword", obj_crosswordEmpty);
+	referenceBox.image_xscale += scaleUp;
+	referenceBox.image_yscale += scaleUp;
+	allBoxes = array_create(width * height);
+
 		centerOfScreen = (room_width/2) + (referenceBox.sprite_width/2);
 		startX = centerOfScreen - (referenceBox.sprite_width * (width/2));
 		posX = startX;
 		posY = room_height / 8;
 	
-
 		instance_destroy(referenceBox);
-		for(i=0; i < width * height; i++)
+		for(i=0; i <= width * height; i++)
 		{
 			box = instance_create_layer(posX, posY, "crossword", obj_crosswordEmpty);
-			//box.image_xscale += 0.5;
-			//box.image_yscale += 0.5;
+			box.image_xscale += scaleUp;
+			box.image_yscale += scaleUp;
 			allBoxes[i] = box;
 			box.image_alpha = 0;
 			if( (i+1) % width == 0)
 			{
 				posX = startX;
-				posY += box.sprite_height-3;
+				posY += box.sprite_height-(3*box.image_xscale);
 			}
 			else
 			{
-				posX += box.sprite_width-3; 
+				posX += box.sprite_width-(3*box.image_xscale); 
 				if(i=0)
 				{
 						show_debug_message("sprite_width: ");
@@ -118,7 +130,7 @@ function CreateCrossword(crosswordString) //     letters:ate;width:3;words:tea-0
 				}
 			}
 		}
-		for ( i= 0; i < array_length(global.puzzleWords); i++) // tea
+		for ( i= 0; i < array_length(global.puzzleWords); i++) // tea  page
 		{
 			isKnownWord = false;
 			for ( k=0; k< array_length(global.knownWords); k++)
@@ -139,11 +151,6 @@ function CreateCrossword(crosswordString) //     letters:ate;width:3;words:tea-0
 				allBoxes[index].SetLetter(string_char_at(global.puzzleWords[i],j+1),isKnownWord);
 			}
 		}
-	}
-	else
-	{
-		// for more than width = 6 
-	}
 	global.allBoxes = allBoxes;
 	SetCrosswordBoxesDirections(width,height);
 }
@@ -191,17 +198,17 @@ function SetCrosswordBoxesDirections(crosswordWidth, crosswordHeight)
 			{
 				boxes[i].bottom = true;
 			}
-		//if(i == 5)
-		//{
-		//    show_debug_message("top: ");
-		//	show_debug_message(boxes[i].top);
-		//	show_debug_message("bottom: ");
-		//	show_debug_message(boxes[i].bottom);
-		//	show_debug_message("right: ");
-		//	show_debug_message(boxes[i].right);
-		//	show_debug_message("left: ");
-		//	show_debug_message(boxes[i].left);
-		//}
+		if(i == 5)
+		{
+		    show_debug_message("top: ");
+			show_debug_message(boxes[i].top);
+			show_debug_message("bottom: ");
+			show_debug_message(boxes[i].bottom);
+			show_debug_message("right: ");
+			show_debug_message(boxes[i].right);
+			show_debug_message("left: ");
+			show_debug_message(boxes[i].left);
+		}
 			boxes[i].ChangeSprite();
 			
 		}

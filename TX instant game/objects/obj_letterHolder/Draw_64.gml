@@ -3,8 +3,6 @@
 
 	draw_self();
 	draw_set_font(font_letters);
-	draw_text(id.x,id.y,letter);
-	draw_set_halign(fa_center);
-	draw_set_valign(fa_center);
-	draw_set_color(c_black);
-	draw_set_alpha(1);
+	//var outlineSize = 4;
+    //draw_text_colour(id.x+outlineSize, id.y+outlineSize,insideLetter,c_black,c_black,c_black,c_black,filledLetterAlpha);
+	draw_text_colour(id.x,id.y,letter,c_black,c_black,c_black,c_black,1);
