@@ -11,4 +11,5 @@ function UndoLetter()
 	pressed_once = false;
 	pressed = false;
 	sprite_index = spr_letterHolder;
+	Debug("UndoLetter UndoLetterUndoLetterUndoLetter")
 }

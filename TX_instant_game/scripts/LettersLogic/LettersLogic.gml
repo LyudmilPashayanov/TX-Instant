@@ -1,16 +1,18 @@
 
 // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-function CheckForRelease(){
+
+global.indexLetterObjects = -1;
+global.swipeStripesIndex = -1;
+
+function CheckForRelease()
+{
 	if(mouse_check_button_released(mb_left))
 	{
 		ReleaseLetters();
 	}
 }
 
-	global.indexLetterObjects = -1;
-	global.swipeStripesIndex = -1;
-	
 function ReleaseLetters()
 {
 	show_debug_message("ReleaseLetters ReleaseLetters ReleaseLetters ReleaseLetters ReleaseLetters ");
@@ -19,8 +21,9 @@ function ReleaseLetters()
 		{
 			pressed=false;
 			pressed_once=false;
+			sprite_index = spr_letterHolder;
 		}
-		obj_letterHolder.sprite_index = spr_letterHolder;
+		
 		RemoveAllSwipeStripes();
 		CheckForWord(global.CurrentWord); // Logic to see if the word is correct 
 		wordFrame_object.visible=false;

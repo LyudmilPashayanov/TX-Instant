@@ -1,10 +1,5 @@
 /// @description Insert description here
 // You can write your code in this editor
-global.base_width = room_width;
-global.base_height = room_height;
-width = global.base_width;
-height = global.base_height;
-Debug("base width: "+string(base_width)+ "     base height: "+string(base_height))
 
 FBInstantGames_Initialise();
 FBInstantGames_SetLoadProgress(100);
@@ -12,10 +7,27 @@ FBInstantGames_StartGame("gmcallback_gamestarted", "gmcallback_onpause");
 
 function StartGame()
 {	
-	
 	DefineLayers();
 	CreateCrossword("--C?T?--/--A-A---/-STAC---");
 	SetAvailableLetters();
+}
+
+StartGame();
+
+global.base_width = room_width;
+global.base_height = room_height;
+global.currentWidth = 0;
+global.currentHeight = 0;
+width = global.base_width;
+height = global.base_height;
+function SetResolution()
+{
+	if (browser_width != width || browser_height != height)
+    {
+		width = min(global.base_width, browser_width);
+		height = min(global.base_height, browser_height);
+		ScaleCanvas(global.base_width, global.base_height, width, height, true);
+    }
 }
 
 function ScaleCanvas(argument0,argument1,argument2,argument3,argument4)
@@ -39,22 +51,14 @@ if (_center)
     {
 		window_center();
     }
-	//Debug("final window set size- width: " + string(min(window_get_width(), _bw)) + " height:" + string(min(window_get_height(), _bh)));
 	global.rescaledWidth = min(window_get_width(), _bw);
 	global.rescaledHeight = min(window_get_height(), _bh);
-	//global.resDif = global.base_width / global.rescaledWidth;
-	surface_resize(application_surface, global.rescaledWidth, global.rescaledHeight);
-	display_set_gui_size(view_wport[0], view_hport[0]);
+	if(global.rescaledWidth != global.currentWidth || global.rescaledHeight != global.currentHeight)
+	{
+		Debug("global.currentWidth" + string(global.currentWidth) + " global.rescaledWidth " + string(global.rescaledWidth));
+		global.currentWidth = global.rescaledWidth;
+		global.currentHeight = global.rescaledHeight;
+		surface_resize(application_surface, global.rescaledWidth, global.rescaledHeight);
+		display_set_gui_size(view_wport[0], view_hport[0]);
+	}
 }
-
-function SetResolution(){
-if (browser_width != width || browser_height != height)
-    {
-    width = min(global.base_width, browser_width);
-    height = min(global.base_height, browser_height);
-    ScaleCanvas(global.base_width, global.base_height, width, height, true);
-    }
-}
-
-
-StartGame();

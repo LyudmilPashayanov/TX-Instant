@@ -53,6 +53,7 @@
     {"id":{"name":"snap_from_ini_string","path":"scripts/snap_from_ini_string/snap_from_ini_string.yy",},"order":1,},
     {"id":{"name":"font_crosswordLetters","path":"fonts/font_crosswordLetters/font_crosswordLetters.yy",},"order":2,},
     {"id":{"name":"spr_letterHolder","path":"sprites/spr_letterHolder/spr_letterHolder.yy",},"order":1,},
+    {"id":{"name":"ResolutionManager","path":"scripts/ResolutionManager/ResolutionManager.yy",},"order":4,},
     {"id":{"name":"snap_to_json","path":"scripts/snap_to_json/snap_to_json.yy",},"order":1,},
     {"id":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},"order":0,},
   ],
