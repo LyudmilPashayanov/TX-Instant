@@ -1,18 +1,17 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-FBInstantGames_Initialise();
-FBInstantGames_SetLoadProgress(100);
-FBInstantGames_StartGame("gmcallback_gamestarted", "gmcallback_onpause");
-
-function StartGame()
-{	
+function StartGame(gameData)
+{
+	Debug("StartGame StartGameStartGameStartGame");
 	DefineLayers();
-	CreateCrossword("--C?T?--/--A-A---/-STAC---");
+	CreateCrossword(string(gameData));
 	SetAvailableLetters();
 }
 
-StartGame();
+FBInstantGames_Initialise();
+FBInstantGames_SetLoadProgress(100);
+FBInstantGames_StartGame("gmcallback_onstart", "gmcallback_onpause");
 
 global.base_width = room_width;
 global.base_height = room_height;
